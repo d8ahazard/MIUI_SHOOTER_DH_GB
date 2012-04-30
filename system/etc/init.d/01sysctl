@@ -1,0 +1,4 @@
+#!/system/bin/sh
+sysctl -p
+
+echo 2 > /sys/devices/platform/leds-pm8058/leds/button-backlight/currents

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+   This file is used for those applications which wants to run in the
+   native android mode.
+-->
+<MIUI_Theme_Values>
+    <color name="mi_screen_background_dark">#ff000000</color>
+    <color name="mi_screen_background_dark_transparent">#80000000</color>
+    <color name="mi_background_dark">#ff000000</color>
+    <color name="mi_bright_background_dark">#ff000000</color>
+    <color name="mi_bright_foreground_dark">#ffffffff</color>
+    <color name="mi_bright_foreground_dark_disabled">#80ffffff</color>
+    <color name="mi_bright_foreground_dark_inverse">#ff000000</color>
+    <color name="mi_dim_foreground_dark">#ffbebebe</color>
+    <color name="mi_dim_foreground_dark_disabled">#80bebebe</color>
+    <color name="mi_dim_foreground_dark_inverse">#ff323232</color>
+    <color name="mi_dim_foreground_dark_inverse_disabled">#80323232</color>
+
+    <color name="dlg_bright_foreground_dark">#ffffffff</color>
+    <color name="dlg_bright_foreground_dark_inverse">#ff000000</color>
+    <color name="dlg_bright_foreground_dark_disabled">#80ffffff</color>
+    <color name="dlg_dim_foreground_dark">#ffbebebe</color>
+    <color name="dlg_dim_foreground_dark_disabled">#80bebebe</color>
+    <color name="dlg_dim_foreground_dark_inverse">#ff323232</color>
+    <color name="dlg_dim_foreground_dark_inverse_disabled">#80323232</color>
+    <color name="dlg_bright_foreground_light">#ffffffff</color>
+    <color name="dlg_bright_foreground_light_inverse">#ff000000</color>
+    <color name="dlg_bright_foreground_light_disabled">#80ffffff</color>
+    <color name="dlg_dim_foreground_light">#ffbebebe</color>
+    <color name="dlg_dim_foreground_light_disabled">#80bebebe</color>
+    <color name="dlg_dim_foreground_light_inverse">#ff323232</color>
+    <color name="dlg_dim_foreground_light_inverse_disabled">#80323232</color>
+
+</MIUI_Theme_Values>

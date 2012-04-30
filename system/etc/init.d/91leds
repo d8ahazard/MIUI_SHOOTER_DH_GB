@@ -1,0 +1,4 @@
+#!/system/bin/sh
+#created by -viperboy-
+
+echo 5 > /sys/devices/platform/leds-pm8058/leds/button-backlight/currents

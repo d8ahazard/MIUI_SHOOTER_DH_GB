@@ -1,0 +1,21 @@
+#!/system/bin/sh
+#created by -viperboy-
+
+while : ; do
+	if [ `cat /system/etc/virtuous_oc/sleep_governor` = "conservative" ]; then
+		echo "Conservative set in virtuous for screen off"
+		if [ -e /sys/devices/system/cpu/cpufreq/conservative ]; then
+			echo 93 > /sys/devices/system/cpu/cpufreq/conservative/up_threshold
+			echo 85 > /sys/devices/system/cpu/cpufreq/conservative/down_threshold
+			echo 15 > /sys/devices/system/cpu/cpufreq/conservative/freq_step
+			echo "Conservative settings set!"
+			exit
+		else
+			echo "Conservative settings not set, waiting for screen off..."
+			echo
+		fi
+	else
+		echo "Conservative not set in virtuous for screen off"
+		exit
+	fi
+done &

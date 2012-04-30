@@ -1,0 +1,51 @@
+#!/system/bin/sh
+
+OLDHOSTSMD5=`md5sum /system/etc/hosts | cut -b -32`
+
+echo "Fetching host file via hostname"
+cd /data/local/tmp
+wget -O hosts http://pgl.yoyo.org/as/serverlist.php?showintro=0;hostformat=hosts
+
+if [ -s hosts ]; then
+    NEWHOSTSMD5=`md5sum hosts | cut -b -32`
+
+    if [ $NEWHOSTSMD5 == $OLDHOSTSMD5 ]; then
+        rm -f hosts
+        echo "host file is already up to date, exiting..."
+        exit 0
+    fi
+
+    mount -o remount rw /system
+
+    if [ ! -s /system/xbin/blockads ]; then
+        echo "\n Adding this script to your system path. To run it in the future, type su and then blockads"
+        cp blockads /system/xbin/blockads
+        chown root /system/xbin/blockads
+        chmod 755 /system/xbin/blockads
+    fi
+    
+    echo "backing up old host file and updating"
+    mv /system/etc/hosts /system/etc/hosts.bak
+    mv hosts /system/etc/hosts
+    OLDHOSTSMD5=`md5sum /system/etc/hosts | cut -b -32`
+
+    if [ $NEWHOSTSMD5 != $OLDHOSTSMD5 ]; then
+        echo "Host file could not be updated (could not be moved). Aborting..."
+        mount -o remount ro /system
+        exit 1
+    fi
+
+    chown root /system/etc/hosts
+    chmod 644 /system/etc/hosts
+
+    echo "remounting filesystem in r/o mode..."
+    mount -o remount ro /system
+    echo "Cleaning up files..."
+    rm -f hosts
+
+    echo "update complete!"
+    exit 0
+fi
+
+echo "update could not be completed, sorry :("
+exit 1

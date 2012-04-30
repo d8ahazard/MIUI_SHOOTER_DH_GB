@@ -1,0 +1,22 @@
+#!/system/bin/sh
+
+# ===========================================================================
+#  CoreDroid ROM Tools (henk2484)
+#
+#  Tue Jun  7 13:57:52 PDT 2011
+# ===========================================================================
+
+OC_APPS="ch.amana.android.cputuner com.mhuang.overclocking org.freecoder.widgets.overclock com.antutu.CpuMasterFree"
+
+$LOG -p i "Executing optimization script"
+
+# Check whether any cpu tuning apps are already installed.
+# If not, we'll start our custom daemon.
+
+if is_package_installed $OC_APPS ; then
+    $LOG -p i "User-installed overclocking app detected; disabled Virtuous_OC"
+else
+    $LOG -p i "No overclocking apps detected; enabling Virtuous_OC"
+    /system/xbin/virtuous_oc
+fi
+

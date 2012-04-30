@@ -1,0 +1,111 @@
+#!/system/bin/sh
+#The Configurator-The Works
+#smokin1337
+		CLEANUP=`cat /system/etc/configurator/cleanup`
+		GOV=`cat /system/etc/configurator/scaling_governor`
+		MAX=`cat /system/etc/configurator/scaling_max_freq`
+		MIN=`cat /system/etc/configurator/scaling_min_freq`
+		SET=`cat /system/etc/configurator/set`
+		SWITCH=`cat /system/etc/configurator/switch`
+		IOS=`cat /system/etc/configurator/scheduler`
+		LED=`cat /system/etc/configurator/led`
+		VOLTAGE=`cat /system/etc/configurator/voltage`
+		ATIME=`cat /system/etc/configurator/atime`
+		
+if [ "$SWITCH" = "1" ]; then
+		echo $LED > /sys/devices/platform/leds-pm8058/leds/button-backlight/currents
+		echo $IOS > /sys/block/mmcblk0/queue/scheduler
+		echo "0" > /sys/block/mmcblk0/queue/rotational
+		echo "2048" > /sys/block/mmcblk0/queue/nr_requests
+		echo "8192" > /sys/block/mmcblk0/queue/read_ahead_kb
+		
+		echo $IOS > /sys/block/mmcblk1/queue/scheduler
+		echo "0" > /sys/block/mmcblk1/queue/rotational
+		echo "2048" > /sys/block/mmcblk1/queue/nr_requests
+		echo 8192 > /sys/block/mmcblk1/queue/read_ahead_kb
+
+if [ "$CLEANUP" = "1" ]; then
+	if [ -e /cache/*.apk ]; then
+		rm /cache/*.apk
+	fi	
+	if [ -e /cache/*.tmp ]; then	
+		rm /cache/*.tmp
+	fi
+    if [ -e /data/dalvik-cache/*.apk ]; then
+		rm /data/dalvik-cache/*.apk
+	fi	
+	if [ -e /data/dalvik-cache/*.tmp ]; then	
+		rm /data/dalvik-cache/*.tmp
+	fi
+    if [ -e /sdcard/LOST.DIR/* ]; then	
+		rm /sdcard/LOST.DIR/*
+	fi	
+	if [ -e /sdcard/.trash-* ]; then	
+		rm /sdcard/.trash-*
+	fi
+fi
+if [ "$SET" = "1" ]; then
+	if [ -e /system/etc/configurator/scaling_governor ]; then
+	    echo $GOV > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+	fi
+	if [ -e /system/etc/configurator/scaling_max_freq ]; then
+    	echo $MAX > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+	fi	
+	if [ -e /system/etc/configurator/scaling_min_freq ]; then	
+		echo $MIN > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+	fi
+fi
+
+if [ -e /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels ]; then
+if [ "$VOLTAGE" = "1" ]; then	
+		echo "192000 800000" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "310500 800000" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "384000 800000" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "432000 800000" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "486000 812500" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "540000 825000" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "594000 837500" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "648000 850000" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "702000 875000" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "756000 900000" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "810000 912500" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "864000 937500" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "918000 937500" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "972000 937500" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "1026000 950000" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "1080000 962500" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "1134000 975000" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "1188000 987500" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "1242000 1100000" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "1296000 1125000" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "1350000 1150000" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "1404000 1175000" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "1458000 1187500" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "1512000 1200000" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "1566000 1225000" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "1620000 1250000" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "1674000 1275000" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "1728000 1350000" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "1782000 1350000" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo "1836000 1350000" > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+fi
+fi	
+if [ "$ATIME" = 1 ]; then
+busybox mount -o remount,ro,noatime,noauto_da_alloc,nodiratime,barrier=0,nobh /system
+busybox mount -o remount,noatime,noauto_da_alloc,nodiratime,nodev,barrier=0,nobh /data
+busybox mount -o remount,noatime,noauto_da_alloc,nodiratime,nodev,barrier=0,nobh /cache
+busybox mount -o remount,noatime,nodiratime auto /
+busybox mount -o remount,noatime,nodiratime auto /dev
+busybox mount -o remount,noatime,nodiratime auto /proc
+busybox mount -o remount,noatime,nodiratime auto /sys
+busybox mount -o remount,noatime,nodiratime auto /mnt/asec
+busybox mount -o remount,noatime,nodiratime auto /mnt/sdcard
+busybox mount -o remount,noatime,nodiratime auto /mnt/secure/asec
+busybox mount -o remount,noatime,nodiratime auto /mnt/sdcard/.android_secure
+fi
+
+CACHE=`cat /system/etc/configurator/cache`
+if [ "$CACHE" = 1 ]; then
+echo "4096" > /sys/devices/virtual/bdi/179:0/read_ahead_kb;
+fi
+fi

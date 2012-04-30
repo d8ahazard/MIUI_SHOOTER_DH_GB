@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<customization_form>
+  <category name="system">
+    <module name="locale">
+      <function>
+        <set name="single">
+          <item name="total_list">en_US;es_US;</item>
+          <item type="boolean" name="en_US">yes</item>
+          <item type="boolean" name="es_US">yes</item>
+        </set>
+      </function>
+    </module>
+    <module name="Settings">
+      <function name="screen_timeout">
+        <set name="plenty">
+          <item name="value1">15000</item>
+          <item name="value2">30000</item>
+          <item name="value3">60000</item>
+          <item name="value4">120000</item>
+          <item name="value5">600000</item>
+          <item name="value6">-1</item>
+        </set>
+      </function>
+    </module>
+    <module name="InputMethod">
+      <function name="IME_language_set">
+        <set name="single">
+          <item type="boolean" name="English">yes</item>
+          <item type="boolean" name="German">yes</item>
+          <item type="boolean" name="France">yes</item>
+          <item type="boolean" name="Italian">yes</item>
+          <item type="boolean" name="Spanish">yes</item>
+          <item type="boolean" name="Russian">yes</item>
+          <item type="boolean" name="Czech">yes</item>
+          <item type="boolean" name="Danish">yes</item>
+          <item type="boolean" name="Swedish">yes</item>
+          <item type="boolean" name="Norwegian">yes</item>
+          <item type="boolean" name="Dutch">yes</item>
+          <item type="boolean" name="Polish">yes</item>
+          <item type="boolean" name="Portugal">yes</item>
+          <item type="boolean" name="Greek">yes</item>
+          <item type="boolean" name="Turkish">yes</item>
+          <item type="boolean" name="Finnish">yes</item>
+          <item type="boolean" name="Hungarian">yes</item>
+          <item type="boolean" name="Romanian">yes</item>
+          <item type="boolean" name="Slovak">yes</item>
+          <item type="boolean" name="Croatian">yes</item>
+          <item type="boolean" name="Slovenian">yes</item>
+          <item type="boolean" name="Serbian">yes</item>
+          <item type="boolean" name="Bulgarian">yes</item>
+        </set>
+      </function>
+      <function name="IME_sip_set">
+        <set name="single">
+          <item name="total_list">Handwriting;ZuhYin;CangJie;PinYin;Stroke;</item>
+          <item type="boolean" name="ZuhYin">yes</item>
+          <item type="boolean" name="CangJie">yes</item>
+          <item type="boolean" name="PinYin">yes</item>
+          <item type="boolean" name="Stroke">yes</item>
+        </set>
+      </function>
+    </module>
+    <module name="deviceData">
+      <function>
+        <set name="single">
+          <item name="device_name">PG86100</item>
+        </set>
+      </function>
+    </module>
+    <module name="deviceData1">
+      <function>
+        <set name="single">
+          <item name="sw_number">NA</item>
+        </set>
+      </function>
+    </module>
+  </category>
+  <category name="application">
+    <module name="Crash_Report">
+      <function name="setting">
+        <set name="single">
+          <item name="turn_off_report" type="boolean">yes</item>
+          <item name="turn_off_tell_htc" type="boolean">yes</item>
+          <item name="hide_usage_report" type="boolean">yes</item>
+        </set>
+      </function>
+    </module>
+    <module name="OOBE">
+      <function name="Step_Config">
+        <set name="single">
+          <item name="Set_Language" type="boolean">no</item>
+          <item name="Internet_Connection" type="boolean">no</item>
+        </set>
+      </function>
+    </module>
+    <module name="Footprints">
+      <function name="settings">
+        <set name="settings">
+          <item name="retrieve_address">true</item>
+          <item name="show_location_disasble_alert">true</item>
+          <item name="show_connection_failed_alert">true</item>
+          <item name="serial_number">0</item>
+          <item name="list_sort">create_time desc</item>
+          <item name="camera_white_balance">0</item>
+          <item name="camera_brightness">5</item>
+        </set>
+      </function>
+      <function name="kmz">
+        <set name="single">
+          <item name="kmz_path">/system/customize/resource/preset.kmz</item>
+        </set>
+      </function>
+      <function name="preset">
+        <set name="plenty" max="13">
+          <item name="name">Big Ben</item>
+          <item name="create_date">1239629156966</item>
+          <item name="category">favorite</item>
+          <item name="rate">3</item>
+          <item name="accuracy">3</item>
+          <item name="latitude">51500605</item>
+          <item name="longitude">-124608</item>
+          <item name="addr">House of Commons, Westminster, London, UK</item>
+          <item name="comment">Hearing Big Ben was amazing – everyone's hoping the great weather keeps up.</item>
+          <item name="pic_filename">/system/customize/resource/BigBen.jpg</item>
+        </set>
+        <set name="plenty" max="13">
+          <item name="name">Eiffel Tower</item>
+          <item name="create_date">1239629156965</item>
+          <item name="category">favorite</item>
+          <item name="rate">3</item>
+          <item name="accuracy">3</item>
+          <item name="latitude">48858300</item>
+          <item name="longitude">2294500</item>
+          <item name="addr">Champ de Mars, 75008 Paris, France</item>
+          <item name="site">http://www.tour-eiffel.fr/</item>
+          <item name="comment">Drinking wine in the shadow of the Eiffel tower was the best. I couldn't get over how tall it was.</item>
+          <item name="pic_filename">/system/customize/resource/EiffelTower.jpg</item>
+        </set>
+        <set name="plenty" max="13">
+          <item name="name">Colosseum</item>
+          <item name="create_date">1239629156964</item>
+          <item name="category">favorite</item>
+          <item name="rate">3</item>
+          <item name="accuracy">3</item>
+          <item name="latitude">41890169</item>
+          <item name="longitude">12492269</item>
+          <item name="addr">Piazza del Colosseo, 00184 Rome, Italy</item>
+          <item name="comment">On the second day in Rome we got to visit the Colosseum. You could almost hear the sounds of the gladiators.</item>
+          <item name="pic_filename">/system/customize/resource/Colosseum.jpg</item>
+        </set>
+        <set name="plenty" max="13">
+          <item name="name">Statue of Liberty</item>
+          <item name="create_date">1239629156963</item>
+          <item name="category">favorite</item>
+          <item name="rate">3</item>
+          <item name="accuracy">3</item>
+          <item name="latitude">40689200</item>
+          <item name="longitude">-74044500</item>
+          <item name="addr">National Park Services Liberty Island New York, NY 10004, USA</item>
+          <item name="site">http://www.nps.gov/stli/</item>
+          <item name="comment">I was really impressed with her beauty. For a second I thought she winked at me.</item>
+          <item name="pic_filename">/system/customize/resource/StatueOfLiberty.jpg</item>
+        </set>
+      </function>
+    </module>
+  </category>
+  <BootConfiguration>
+    <BootAnimation animation="/data/local/bootanimation.zip" audio="/data/local/android_audio.mp3" />
+  </BootConfiguration>
+  <ShutdownConfiguration>
+    <ShutdownAnimation image_png="/data/local/bootdown.zip" image="" fps="15" />
+  </ShutdownConfiguration>
+  <category name="SettingsProvider">
+    <module name="res">
+      <function name="values">
+        <set name="single">
+          <item name="def_inactivity_time">0</item>
+        </set>
+      </function>
+    </module>
+  </category>
+  <category name="Settings">
+    <module name="list">
+      <function name="blocked_applications">
+        <set name="single">
+          <item name="1">com.handson.h2o.nascar09</item>
+          <item name="2">com.mobitv.client.sprinttvng</item>
+          <item name="3">com.mspot.android.music.mspotradiosprint</item>
+          <item name="4">com.qikffc.android</item>
+          <item name="5">com.telenav.app.android.sprint</item>
+          <item name="6">com.gameloft.microwidget</item>
+          <item name="7">com.blockbuster.app.htc</item>
+        </set>
+      </function>
+    </module>
+    <module name="properties">
+      <function>
+        <set name="single">
+          <item name="market_name">HTC EVO 3D</item>
+        </set>
+      </function>
+    </module>
+  </category>
+</customization_form>

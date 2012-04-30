@@ -1,0 +1,663 @@
+#!/system/bin/sh
+#The Configurator-Conf Script
+#smokin1337
+
+busybox mount -o remount,rw -t auto /system;
+busybox mount -o remount,rw -t auto /data;
+
+VOC=`cat /system/etc/configurator/voc`
+
+voc ()
+{
+while echo
+	do
+echo "Configure VOC"
+	   echo -n "Please Enter Your Selection: "
+	   echo
+	   echo "1. Sleep Governor"
+	   echo
+	   echo "2. Sleep Max Freq"
+	   echo
+	   echo "3. Sleep Min Freq"
+	   echo
+	   echo "4. Wake Governor"
+	   echo
+	   echo "5. Wake Max Freq"
+	   echo
+	   echo "6. Wake Min Freq"
+	   echo
+	   echo "7. Return to Main Menu"
+	   echo -n "Please Enter Your Selection: "
+	   read selection
+	   case $selection in
+	   1) echo "Setting Sleep Governor"
+	      echo
+			echo "Available Governors"
+			echo "******************"
+			cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors | awk ' {for(i=1;i<=NF;++i) print x++ "\t" $i } '
+			echo "******************"
+		  echo "Current Sleep Governor:"
+		  cat /system/etc/virtuous_oc/sleep_governor
+		  echo -n "Please Enter Your Selection: "
+		  read setting
+	      if echo $setting | egrep -q '[0-6]'; then
+	      `cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors | awk ' {for(i=1;i<=NF;++i) print x++ "\t" $i } ' | grep -w $setting | awk '{ print $2 }' > /system/etc/virtuous_oc/sleep_governor`
+	      echo "Done"
+	      echo -n "Press Enter to Continue"
+	      read key
+	      else 
+	      echo "Invalid Selection"
+	      echo
+	      echo "Press Enter to Continue"
+	      read key
+		  fi
+		  ;;
+	    2) echo "Setting Sleep Max Freq"
+		  echo "********************"
+	      echo "Current Sleep Max Frequency:"
+	      cat /system/etc/virtuous_oc/sleep_max_freq
+	      echo "Available Max Frequency:"
+	      cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq
+	      echo "Available Settings:"
+	      cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
+	      echo "********************"
+		  echo -n "Please Enter Your Selection: "
+		  read setting
+	      if echo $setting | egrep -q '[0-9]'; then
+	      echo $setting > /system/etc/virtuous_oc/sleep_max_freq
+	      echo "Done"
+	      echo -n "Press Enter to Continue"
+	      read key
+	      else 
+	      echo "Invalid Selection"
+	      echo
+	      echo "Press Enter to Continue"
+	      read key
+		  fi
+		  ;;
+		3) echo "Setting Sleep Min Freq"
+		  echo "********************"
+		  echo "Current Sleep Min Frequency:"
+	      cat /system/etc/virtuous_oc/sleep_min_freq
+	      echo "Available Min Frequency:"
+	      cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_min_freq
+	      echo "Available Settings:"
+	      cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
+	      echo "********************"
+		  echo -n "Please Enter Your Selection: "
+		  read setting
+	      if echo $setting | egrep -q '[0-9]'; then
+	      echo $setting > /system/etc/virtuous_oc/sleep_min_freq
+	      echo "Done"
+	      echo -n "Press Enter to Continue"
+	      read key
+	      else 
+	      echo "Invalid Selection"
+	      echo
+	      echo "Press Enter to Continue"
+	      read key
+		  fi
+		  ;;
+		4) echo "Setting Wake Governor"
+			echo
+			echo "Available Governors"
+			echo "******************"
+			cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors | awk ' {for(i=1;i<=NF;++i) print x++ "\t" $i } '
+			echo "******************"
+		    echo "Current Wake Governor:"
+			cat /system/etc/virtuous_oc/wake_governor
+		  echo -n "Please Enter Your Selection: "
+		  read setting
+	      if echo $setting | egrep -q '[0-9]'; then
+	      `cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors | awk ' {for(i=1;i<=NF;++i) print x++ "\t" $i } ' | grep -w $setting | awk '{ print $2 }' > /system/etc/virtuous_oc/wake_governor`
+	      echo "Done"
+	      echo -n "Press Enter to Continue"
+	      read key
+	      else 
+	      echo "Invalid Selection"
+	      echo
+	      echo "Press Enter to Continue"
+	      read key
+		  fi
+		  ;;
+		5) echo "Setting Wake Max Freq"
+		   echo "********************"
+	      echo "Current Wake Max Frequency:"
+	      cat /system/etc/virtuous_oc/wake_max_freq
+	      echo "Available Max Frequency:"
+	      cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq
+	      echo "Available Settings:"
+	      cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
+	      echo "********************"
+		  echo -n "Please Enter Your Selection: "
+		  read setting
+	      if echo $setting | egrep -q '[0-9]'; then
+	      echo $setting > /system/etc/virtuous_oc/wake_max_freq
+	      echo "Done"
+	      echo -n "Press Enter to Continue"
+	      read key
+	      else 
+	      echo "Invalid Selection"
+	      echo
+	      echo "Press Enter to Continue"
+	      read key
+		  fi
+		  ;;
+		6) echo "Setting Wake Min Freq"
+		  echo "********************"
+		  echo "Current Wake Min Frequency:"
+	      cat /system/etc/virtuous_oc/wake_min_freq
+	      echo "Available Min Frequency:"
+	      cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_min_freq
+	      echo "Available Settings:"
+		  cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
+	      echo "********************"
+		  echo -n "Please Enter Your Selection: "
+		  read setting
+	      if echo $setting | egrep -q '[0-9]'; then
+	      echo $setting > /system/etc/virtuous_oc/wake_min_freq
+	      echo "Done"
+	      echo -n "Press Enter to Continue"
+	      read key
+	      else 
+	      echo "Invalid Selection"
+	      echo
+	      echo "Press Enter to Continue"
+	      read key
+		  fi
+		  ;;
+		7) pkill virtuous_oc
+		   /system/xbin/virtuous_oc
+     	   main
+		   ;;
+		*) voc 
+		  ;;
+		  esac
+done
+}
+
+main ()
+{
+echo "Welcome to The Configurator"
+echo
+echo "By smokin1337"
+echo
+echo "Make a Selection"
+echo
+echo "1. Set CPU Governor"
+echo
+echo "2. Set Max CPU Frequency"
+echo
+echo "3. Set Min CPU Frequency"
+echo
+echo "4. Undervolt CPU"
+echo
+echo "5. Sick Tweaks"
+echo
+echo "6. Enable/Disable Virtuous OC"
+echo
+echo "7. Configure Virtuous OC"
+echo
+echo "8. Enable/Disable The Configurator"
+echo
+echo "9. Adjust LCD Capacitive Buttons Brightness"
+echo
+echo "10. Optimize Mounts"
+echo
+echo "11. Enable/Disable SD Read Ahead"
+echo
+echo "12. Backup Apps"
+echo
+echo "13. Restore Apps"
+echo
+echo "14. Backup Configurator Settings"
+echo
+echo "15. Restore Configurator Settings"
+echo
+echo "16. Enable/Disable Cleanup"
+echo
+echo "17. Set I/O Scheduler"
+echo
+echo "18. Exit"
+echo
+echo -n "Please Make a Selection: "
+
+read option
+
+case $option in
+
+	1) echo "*******************"
+	   echo "Available Governers:"
+	   cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors | awk ' {for(i=1;i<=NF;++i) print x++ "\t" $i } '
+	   echo "*******************"
+	   echo -n "Please Enter Your Selection..."
+	   read selection
+	   if echo $selection | egrep -q '[0-9]'; then
+	   echo `cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors | awk ' {for(i=1;i<=NF;++i) print x++ "\t" $i } ' | grep -w $selection | awk '{ print $2 }' > /system/etc/configurator/scaling_governor`
+	   echo 0 > /system/etc/configurator/voc
+	   echo 1 > /system/etc/configurator/set
+	   echo "Done"
+	   echo
+	   echo -n "Press Enter to Continue"
+	   read key
+	   main
+	   
+	   
+	   elif 
+	     
+		 echo $selection | egrep -q '[6-9]'; then
+	     echo "Invalid Selection"
+		 echo
+		 echo -n "Press Enter to Continue"
+	     read key
+	     main
+	   
+	   fi
+	   ;;
+	 
+	2) echo "********************"
+	   echo "Current Max Frequency:"
+	   cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq
+	   echo "Available Max Frequency:"
+	   cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq
+	   echo "Available Settings:"
+	   cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
+	   echo "********************"
+	   echo -n "Please Enter Your Selection: "
+	   read selection
+	   if echo $selection | egrep -q '[0-9]'; then
+	   echo $selection > /system/etc/configurator/scaling_max_freq
+	   echo 0 > /system/etc/configurator/voc
+	   echo 1 > /system/etc/configurator/set
+	   echo "Done"
+	   echo -n "Press Enter to Continue"
+	   read key
+	   main
+	   else 
+	   echo "Invalid Selection"
+	   echo
+	   echo "Press Enter to Continue"
+	   read key
+	   main
+	   fi
+	   ;;
+	  
+	3) echo "********************"
+	   echo "Current Min Frequency:"
+	   cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+	   echo "Available Min Frequency:"
+	   cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_min_freq
+	   echo "Available Settings:"
+	   cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
+	   echo "********************"
+	   echo -n "Please Enter Your Selection: "
+	   read selection
+	   if echo $selection | egrep -q '[0-9]'; then
+	   echo $selection > /system/etc/configurator/scaling_min_freq
+	   echo 0 > /system/etc/configurator/voc
+	   echo 1 > /system/etc/configurator/set
+	   pkill configurator
+	   /system/xbin/configurator
+	   echo "Done"
+	   echo -n "Press Enter to Continue"
+	   read key 
+	   main
+	   else 
+	   echo "Invalid Selection"
+	   echo
+	   echo "Press Enter to Continue"
+	   read key
+	   main
+	   fi
+	   ;;
+	 4) echo "Enable/Disable Undervolting"
+	   echo "Currnetly: (1=Enabled 0=Disabled)"
+	   cat /system/etc/configurator/voltage
+	   echo
+	   echo "1 = Enable 2 = Disable"
+	   echo
+	   echo "Enter your selection: "
+	   read selection
+	   case $selection in
+	   1)	echo 1 > /system/etc/configurator/voltage
+			pkill configurator
+	        /system/xbin/configurator
+			echo "Done"
+			echo -n "Enter to continue..."
+            read key
+			main
+	   ;;
+	   2) echo 0 > /system/etc/configurator/voltage
+			pkill configurator
+	        /system/xbin/configurator
+			echo "noatime Disabled"
+			echo -n "Enter to continue..."
+            read key
+			main
+			;;
+	   esac
+	   ;;
+	5) echo "Enable Sick Tweaks ?"
+	   echo "Currnetly: (1=Enabled 0=Disabled)"
+	   cat /system/etc/configurator/sick
+	   echo
+	   echo "1 = Enable 2 = Disable"
+	   echo
+	   read selection
+	   case $selection in
+	   1)	echo 1 > /system/etc/configurator/sick
+	        pkill configurator
+	        /system/xbin/configurator
+			echo "Sick Tweaks Enabled"
+			echo -n "Enter to continue..."
+            read key
+			main
+			;;
+	   2)   echo 0 > /system/etc/configurator/sick
+	        pkill configurator
+	        /system/xbin/configurator
+			echo "Enter to continue..."
+			read key
+	        main
+	   ;;
+	   esac
+	   ;;
+	6) echo "Enable/Disable Virtuous OC"
+	   echo "Currnetly: (1=Enabled 0=Disabled)"
+	   cat /system/etc/configurator/voc
+	   echo
+	   echo "1 = Enable 2 = Disable"
+	   echo
+	   echo "Enter your selection: "
+	   read selection
+	   case $selection in
+	   1)	echo 1 > /system/etc/configurator/voc
+	        echo 0 > /system/etc/configurator/set
+	        /system/xbin/virtuous_oc
+			echo "Virtuous OC Enabled"
+			echo -n "Enter to continue..."
+            read key
+			main
+			;;
+	   2) echo 0 > /system/etc/configurator/voc
+	        pkill virtuous_oc
+			echo "Virtuous OC Disabled"
+			echo -n "Enter to continue..."
+            read key
+			main
+			;;
+	   esac
+	   ;;
+	
+	7) voc
+	   ;;
+	8) echo "Enable/Disable The Configurator"
+	       echo "Currnetly: (1=Enabled 0=Disabled)"
+	       cat /system/etc/configurator/switch
+		   echo
+		   echo "1 = Disable 2 = Enable"
+		   echo
+		   echo "Enter your selection: "
+		   read selection
+		   case $selection in
+		   1) echo "Disabling..."
+		   echo 0 > /system/etc/configurator/switch
+		   echo 0 > /system/etc/configurator/set
+		   echo 0 > /system/etc/configurator/voc
+		   echo "Done, Reboot Required"
+		   echo -n "Reboot Now ? Y or N "
+		   read choice
+		   case $choice in
+		   y|Y)	/system/etc/configurator/reboot
+		   ;;
+		   n|N) echo "Enter to continue..."
+				read key
+				main
+				;;
+				esac
+		   ;;
+		   2) echo "Enabling..."
+			  echo 1 > /system/etc/configurator/switch
+			  echo "Done, Reboot Required"
+		      echo -n "Reboot Now ? Y or N "
+		      read choice
+		      case $choice in
+		      y|Y)	/system/etc/configurator/reboot
+		      ;;
+		      n|N) echo "Enter to continue..."
+			  read key
+			  main
+			  ;;
+			  esac
+		      ;;
+			  esac
+			  ;;
+	9) echo "********************"
+	   echo "Adjust LED Backlight"
+	   echo "Limit: 50|0=OFF"
+	   echo "Current:"
+	   cat /sys/devices/platform/leds-pm8058/leds/button-backlight/currents
+	   echo "********************"
+	   echo -n "Please Enter Your Selection: "
+	   read selection
+	   if echo $selection | egrep -q '[0-50]'; then
+	   echo $selection > /system/etc/configurator/led
+	   echo $selection > /sys/devices/platform/leds-pm8058/leds/button-backlight/currents
+	   echo "Done"
+	   echo -n "Press Enter to Continue"
+	   read key 
+	   main
+	   else 
+	   echo "Invalid Selection"
+	   echo
+	   echo "Press Enter to Continue"
+	   read key
+	   main
+	   fi
+	   ;;
+	10) echo "Enable/Disable Mount Opts"
+	   echo "Currnetly: (1=Enabled 0=Disabled)"
+	   cat /system/etc/configurator/atime
+	   echo
+	   echo "1 = Enable 2 = Disable"
+	   echo
+	   echo "Enter your selection: "
+	   read selection
+	   case $selection in
+	   1)	echo 1 > /system/etc/configurator/atime
+			pkill configurator
+			/system/xbin/configurator
+			echo "Done"
+			echo -n "Enter to continue..."
+            read key
+			main
+	   ;;
+	   2)   echo 0 > /system/etc/configurator/atime
+			echo "noatime Disabled"
+			echo -n "Enter to continue..."
+            read key
+			main
+			;;
+	   esac
+	   ;;
+	11) echo "Enable/Disable Read Ahead"
+	   echo "Currnetly: (1=Enabled 0=Disabled)"
+	   cat /system/etc/configurator/cache
+	   echo
+	   echo "1 = Enable 2 = Disable"
+	   echo
+	   echo "Enter your selection: "
+	   read selection
+	   case $selection in
+	   1)	echo 1 > /system/etc/configurator/cache
+			pkill configurator
+			/system/xbin/configurator
+			echo "Done"
+			echo -n "Enter to continue..."
+            read key
+			main
+	   ;;
+	   2) echo 0 > /system/etc/configurator/cache
+			echo "Cache Disabled"
+			echo -n "Enter to continue..."
+            read key
+			main
+			;;
+	   esac
+	   ;;
+	   
+	 12) echo "Backup Apps ?"
+	    echo -n "Y or N  "
+	    read selection
+	   case $selection in
+	   y|Y) echo "May Take Some Time..."
+			echo
+	        7z a -tzip /sdcard/Apps-Backup.zip /data/app/*.apk
+			echo "Backup saved to /sdcard/Apps-Backup.zip"
+			echo -n "Enter to continue..."
+            read key
+			main
+			;;
+	  n|N) echo "Nothing Changed"
+			echo -n "Enter to continue..."
+            read key
+			main
+			;;
+	   esac
+	   ;;
+	 13) echo "Restore Apps ?"
+	    echo -n "Y or N  "
+	    read selection
+	   case $selection in
+	   
+	   y|Y) 7z x /sdcard/Apps-Backup.zip -o/data/app -aos
+			echo "Apps Restored"
+			echo -n "Enter to continue..."
+            read key
+			main
+			;;
+	  n|N) echo "Nothing Changed"
+			echo -n "Enter to continue..."
+            read key
+			main
+			;;
+	   esac
+	   ;; 
+	14) echo "Backup Configurator Settings ?"
+	    echo -n "Y or N  "
+	    read selection
+	   case $selection in
+	   y|Y) echo "Making Backup"
+			cp /system/etc/configurator/* /sdcard/configurator/
+			cp /system/etc/virtuous_oc/* /sdcard/virtuous/
+			echo "Backup saved to /sdcard/configurator & /sdcard/virtuous"
+			echo -n "Enter to continue..."
+            read key
+			main
+			;;
+	  n|N) echo "Nothing Changed"
+			echo -n "Enter to continue..."
+            read key
+			main
+			;;
+	   esac
+	   ;;
+	15) echo "Restore Configurator Settings ?"
+	    echo -n "Y or N  "
+	    read selection
+	   case $selection in
+	   
+	   y|Y) rm /system/etc/configurator/*
+		    cp /sdcard/configurator/* /system/etc/configurator/
+			cp /sdcard/virtuous/* /system/etc/virtuous_oc/
+			echo "Settings Restored"
+			echo -n "Enter to continue..."
+            read key
+			main
+			;;
+	  n|N) echo "Nothing Changed"
+			echo -n "Enter to continue..."
+            read key
+			main
+			;;
+	   esac
+	   ;; 
+	16) echo "Enable/Disable Cleanup"
+	   echo "Currnetly: (1=Enabled 0=Disabled)"
+	   cat /system/etc/configurator/cleanup
+	   echo
+	   echo "1 = Enable 2 = Disable"
+	   echo
+	   echo "Enter your selection: "
+	   read selection
+	   case $selection in
+	   1)	echo 1 > /system/etc/configurator/cleanup
+			pkill configurator
+	        /system/xbin/configurator
+			echo "Cleanup Enabled"
+			echo -n "Enter to continue..."
+            read key
+			main
+	   ;;
+	   2) echo 0 > /system/etc/configurator/cleanup
+			pkill configurator
+	        /system/xbin/configurator
+			echo "Cleanup Disabled"
+			echo -n "Enter to continue..."
+            read key
+			main
+			;;
+	   esac
+	   ;;
+	17) echo "Setting I/O Scheduler"
+			echo
+			echo "Available Schedulers(Current = [])"
+			echo "******************"
+			cat /sys/block/mmcblk0/queue/scheduler | awk ' {for(i=1;i<=NF;++i) print x++ "\t" $i } '
+			echo "******************"
+		  echo -n "Please Enter Your Selection: "
+		  read setting
+	      if echo $setting | egrep -q '[0-9]'; then
+	      `cat /sys/block/mmcblk0/queue/scheduler | awk ' {for(i=1;i<=NF;++i) print x++ "\t" $i } ' | grep -w $setting | awk '{ print $2 }' > /system/etc/configurator/scheduler`
+		  pkill configurator
+	      /system/xbin/configurator
+		  echo "Scheduler Set(Must reboot before settings are active)"
+	      echo -n "Press Enter to Continue"
+	      read key
+	      main
+		  else 
+	      echo "Invalid Selection"
+	      echo
+	      echo "Press Enter to Continue"
+	      read key
+		  main
+		  fi
+		  ;;
+	18) /system/xbin/configurator
+	   exit
+	   ;;
+	*) main
+	;;
+	   esac	  
+}
+DONE=`cat /system/etc/configurator/done`
+	
+if [ "$DONE" = 0 ]; then
+		if [ -e /sdcard/configurator ]; then
+		echo "Directory exists"
+		else
+		echo "making directory on sdcard"
+		mkdir /sdcard/configurator
+		fi
+        
+		if [ -e /sdcard/virtuous ]; then
+		echo "Directory exists"
+		else
+		echo "making directory on sdcard"
+		mkdir /sdcard/virtuous
+		echo 1 > /system/etc/configurator/done
+		fi
+fi	
+
+main
+

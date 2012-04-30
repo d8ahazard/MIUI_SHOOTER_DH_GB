@@ -1,0 +1,6 @@
+#!/sbin/sh
+
+echo ""  >> /system/build.prop
+echo "ro.service.swiqi.supported=true" >> /system/build.prop
+echo ""  >> /system/build.prop
+echo "persist.service.swiqi.enable=1" >> /system/build.prop

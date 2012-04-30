@@ -1,0 +1,28 @@
+#!/system/bin/sh
+#
+# ota
+#   - This file allows MIUI updater to use amonra or cwm recoveries to flash
+#     OTA updates by writing to the proper paths used by either cwm or amonra
+#
+#     This script defaults to cwm recovery but can easily be changed
+#
+#     To make OTA's work on AmonRA you need to create a touchfile on the SD
+#     card in /sdcard/MIUI/ota.config.amonra
+#
+#     To make OTA's work on TWRP you need to create a touchfile on the SD
+#     card in /sdcard/MIUI/ota.config.twrp
+#
+# Copyright (c) 2011 MIUI.us
+# Written by n_i_x
+
+if [ -e /sdcard/MIUI/ota.config.amonra ]
+then
+  CMD='/system/xbin/amonraota'
+elif [ -e /sdcard/MIUI/ota.config.twrp ]
+then
+  CMD='/system/xbin/twrpota'
+else
+  CMD='/system/xbin/cwmota'
+fi
+
+$CMD $@

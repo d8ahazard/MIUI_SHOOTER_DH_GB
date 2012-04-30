@@ -1,0 +1,212 @@
+#!/system/bin/sh
+
+READ_AHEAD_KB=$(cat /system/etc/dh/74sched)
+SCHED_SEQ=$(cat /system/etc/dh/75sd)
+
+#Set rac based on DC Script output
+echo "Setting read ahead to $READ_AHEAD_KB"
+echo $READ_AHEAD_KB > /sys/block/mmcblk0/queue/read_ahead_kb
+echo $READ_AHEAD_KB > /sys/block/mmcblk0/queue/read_ahead_kb
+
+#Enable Scheduler as per our DC Script
+echo "Enabling $SCHED scheduler for I/O system!"
+echo "$SCHED" > /sys/block/mmcblk0/queue/scheduler
+echo "$SCHED" > /sys/block/mmcblk0/queue/scheduler
+}
+
+# microSD Card
+echo "4096" > /sys/devices/virtual/bdi/179:0/read_ahead_kb;
+
+#OPTIMIZE MOUNTS
+echo "Optimizing mounts for /system, /data and /cache"
+mount -o remount,data=writeback,delalloc,noatime,noauto_da_alloc,nodiratime,barrier=1,nobh /system
+mount -o remount,delalloc,noatime,noauto_da_alloc,nodiratime,nobh /data
+mount -o remount,delalloc,noatime,noauto_da_alloc,nodiratime,nobh /cache
+
+#Auto Update HOSTS file to block ads if enabled
+if [ `cat /system/etc/dh/76hostud` != 'on' ]; then
+	blockads
+fi
+#CLEAN CACHE
+echo "Cleaning cache directories"
+rm -r /cache/*.apk 2>/dev/null
+rm -r /cache/*.tmp 2>/dev/null
+rm -r /data/dalvik-cache/*.apk 2>/dev/null
+rm -r /data/dalvik-cache/*.tmp 2>/dev/null
+rm -f /cache/recovery/* 2>/dev/null
+
+#SET AUTOKILL
+echo "Adjusting autokill settings"
+echo "0,1,2,4,7,15" > /sys/module/lowmemorykiller/parameters/adj
+echo "2048,3072,4096,6144,7168,8192" > /sys/module/lowmemorykiller/parameters/minfree
+
+#FAST CHARGING 
+FAST CHARGE=$(cat /system/etc/dh/72fast)
+if [ -e /sys/kernel/fast_charge/force_fast_charge ] ; then
+	if [ $FAST_CHARGE = "Fastcharge On" ]; then
+		echo "1" > /sys/kernel/fast_charge/force_fast_charge
+	else
+		echo "0" > /sys/kernel/fast_charge/force_fast_charge
+	fi	
+fi
+
+#sysctl start
+sysctl -p
+
+
+
+#Zip align APKs
+echo "Zip Aligning APKs"
+LOG_FILE=/data/zipalign.log
+    if [ -e $LOG_FILE ]; then
+        rm $LOG_FILE;
+    fi;
+ 
+echo "Starting DC Automatic ZipAlign $( date +"%m-%d-%Y %H:%M:%S" )" | tee -a $LOG_FILE;
+    for apk in /system/app/*.apk ; do
+        zipalign -c 4 $apk;
+        ZIPCHECK=$?;
+        if [ $ZIPCHECK -eq 1 ]; then
+                echo ZipAligning $(basename $apk)  | tee -a $LOG_FILE;
+                zipalign -f 4 $apk /cache/$(basename $apk);
+                        if [ -e /cache/$(basename $apk) ]; then
+                                cp -f -p /cache/$(basename $apk) $apk  | tee -a $LOG_FILE;
+                                rm /cache/$(basename $apk);
+                        else
+                                echo ZipAligning $(basename $apk) Failed DC | tee -a $LOG_FILE;
+                        fi;
+        else
+                echo DCZipAlign already completed on $apk  | tee -a $LOG_FILE;
+        fi;
+       done;
+    for apk in /data/app/*.apk ; do
+        zipalign -c 4 $apk;
+        ZIPCHECK=$?;
+        if [ $ZIPCHECK -eq 1 ]; then
+                echo ZipAligning $(basename $apk)  | tee -a $LOG_FILE;
+                zipalign -f 4 $apk /cache/$(basename $apk);
+                        if [ -e /cache/$(basename $apk) ]; then
+                                cp -f -p /cache/$(basename $apk) $apk  | tee -a $LOG_FILE;
+                                rm /cache/$(basename $apk);
+                        else
+                                echo ZipAligning $(basename $apk) Failed DC | tee -a $LOG_FILE;
+                        fi;
+        else
+                echo DCZipAlign already completed on $apk  | tee -a $LOG_FILE;
+        fi;
+       done;
+echo "Automatic ZipAlign finished at $( date +"%m-%d-%Y %H:%M:%S" )" | tee -a $LOG_FILE;
+
+#COMPRESS DB
+echo "Compressing SQLite databases"
+for db in `find /data -iname "*.db"`; do
+	echo "Compressing $db"
+	sqlite3 $db 'VACUUM;'
+done
+
+echo ""
+
+#INSERT TUN
+
+#Check if tun kernel module is present
+#insert it if it is.
+if [ -e /system/lib/modules/tun.ko ] ; then
+	insmod /system/lib/modules/tun.ko
+	echo "Inserted tun kernel module.";
+else
+	echo "No tun kernel module found.";
+fi
+
+# IPv6 Privacy
+echo "IPv6 tweaks"
+sysctl -w net.ipv6.conf.default.use_tempaddr=2
+sysctl -w net.ipv6.conf.all.use_tempaddr=2
+sysctl -w net.ipv6.conf.all.temp_prefered_lft=3600
+sysctl -w net.ipv6.conf.default.temp_prefered_lft=3600
+sysctl -w net.ipv6.conf.dummy0.use_tempaddr=2
+sysctl -w net.ipv6.conf.ip6tnl0.use_tempaddr=2
+sysctl -w net.ipv6.conf.lo.use_tempaddr=2
+sysctl -w net.ipv6.conf.rmnet0.use_tempaddr=2
+sysctl -w net.ipv6.conf.rmnet1.use_tempaddr=2
+sysctl -w net.ipv6.conf.rmnet2.use_tempaddr=2
+sysctl -w net.ipv6.conf.rmnet3.use_tempaddr=2
+sysctl -w net.ipv6.conf.rmnet4.use_tempaddr=2
+sysctl -w net.ipv6.conf.rmnet5.use_tempaddr=2
+sysctl -w net.ipv6.conf.rmnet6.use_tempaddr=2
+sysctl -w net.ipv6.conf.rmnet7.use_tempaddr=2
+sysctl -w net.ipv6.conf.sit0.use_tempaddr=2
+sysctl -w net.ipv6.conf.usb0.use_tempaddr=2
+echo ""
+
+#Disable Google Checking
+echo "Disable Google checking"
+if [ -e /data/data/com.google.android.gsf/databases/gservices.db ]; then
+	sqlite3 /data/data/com.google.android.gsf/databases/gservices.db "update main set value = 'false' where name = 'perform_market_checkin' and value = 'true'";
+	sqlite3 /data/data/com.google.android.gsf/databases/gservices.db "update main set value = 'false' where name = 'checkin_dropbox_upload:system_update' and value = 'true'"
+	sqlite3 /data/data/com.google.android.gsf/databases/gservices.db "update main set value = 0 where name = 'market_force_checkin' and value = -1"
+	sqlite3 /data/data/com.google.android.gsf/databases/gservices.db "update main set value = 0 where name = 'checkin_interval'"
+	sqlite3 /data/data/com.google.android.gsf/databases/gservices.db "update main set value = 0 where name = 'secure:bandwidth_checkin_stat_interval'"
+fi;
+
+echo ""
+
+#SICK TWEAKS
+echo "Sysctl tweaks"
+sysctl -w vm.oom_kill_allocating_task=0
+sysctl -w fs.nr_open=6553600
+sysctl -w fs.inotify.max_queued_events=10000
+sysctl -w fs.inotify.max_user_instances=100
+sysctl -w fs.inotify.max_user_watches=2500
+sysctl -w fs.lease-break-time=10
+sysctl -w fs.file-max=165164
+sysctl -w vm.laptop_mode=0
+sysctl -w vm.swappiness=0
+sysctl -w vm.overcommit_ratio=100
+sysctl -w vm.overcommit_memory=1
+sysctl -w vm.page-cluster=3
+sysctl -w vm.drop_caches=3
+sysctl -w vm.min_free_kbytes=4096
+sysctl -w vm.dirty_ratio=15
+sysctl -w vm.dirty_background_ratio=4
+sysctl -w vm.vfs_cache_pressure=5
+sysctl -w vm.panic_on_oom=0
+sysctl -w vm.dirty_expire_centisecs=200
+sysctl -w vm.dirty_writeback_centisecs=500
+sysctl -w kernel.sem="500 512000 64 2048"
+sysctl -w kernel.msgmax=64000
+sysctl -w kernel.msgmni=64000
+sysctl -w kernel.threads-max=525810
+sysctl -w kernel.random.write_wakeup_threshold=512
+sysctl -w kernel.random.read_wakeup_threshold=256
+sysctl -w kernel.panic=5
+sysctl -w kernel.shmall=16777216
+sysctl -w kernel.shmmax=268435456
+sysctl -w kernel.sched_latency_ns=10000000
+sysctl -w kernel.sched_min_granularity_ns=2000000
+sysctl -w kernel.sched_wakeup_granularity_ns=0
+sysctl -w kernel.sched_compat_yield=1
+
+setprop cm.filesystem.ready 1
+setprop dc.filesystem.ready 1
+setprop oxygen.filesystem.ready 1
+
+echo ""
+
+echo "Network and IPv4 tweaks"
+sysctl -w net.core.rmem_default=256960
+sysctl -w net.core.wmem_default=256960
+sysctl -w net.core.rmem_max=404480
+sysctl -w net.core.wmem_max=404480
+sysctl -w net.ipv4.tcp_timestamps=0
+sysctl -w net.ipv4.tcp_sack=1
+sysctl -w net.ipv4.tcp_tw_recycle=1
+sysctl -w net.ipv4.tcp_tw_reuse=1
+sysctl -w net.ipv4.tcp_window_scaling=1
+sysctl -w net.ipv4.tcp_fin_timeout=30
+sysctl -w net.ipv4.tcp_keepalive_intvl=30
+sysctl -w net.ipv4.tcp_wmem="4096 16384 404480"
+sysctl -w net.ipv4.tcp_rmem="4096 87380 404480"
+sysctl -w net.ipv4.tcp_keepalive_probes=5
+
+sync
+

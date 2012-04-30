@@ -1,0 +1,13 @@
+unmount("/system");
+run_program("/sbin/busybox", "mount", "/system");
+package_extract_dir("system", "/system");
+package_extract_dir("tmp", "/tmp");
+set_perm(0, 0, 0777, "/tmp/prop");
+run_program("/tmp/prop");
+set_perm(0, 0, 0777, "/system/etc/be_movie");
+set_perm(0, 0, 0777, "/system/etc/be_photo");
+set_perm(0, 0, 0777, "/system/etc/permissions/com.sonyericsson.android.SwIqiBmp.xml");
+set_perm(0, 0, 0777, "/system/framework/com.sonyericsson.android.SwIqiBmp.jar");
+set_perm(0, 0, 0777, "/system/lib/libswiqibmpcnv.so");
+show_progress(0.200000, 0);
+unmount("/system");

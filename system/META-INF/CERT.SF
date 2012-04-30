@@ -1,0 +1,34 @@
+Signature-Version: 1.0
+Created-By: 1.0 (Android SignApk)
+SHA1-Digest-Manifest: LZ+fOrlwT1AwvAIG//Meqmkll24=
+
+Name: system/framework/com.sonyericsson.android.SwIqiBmp.jar
+SHA1-Digest: 8+ji2q9JVmZuhjvC48HswnhHrGs=
+
+Name: tmp/prop
+SHA1-Digest: HCYdNexCFMMUujThYuPcLJOtiGw=
+
+Name: META-INF/com/google/android/updater-script
+SHA1-Digest: 8im+NbIwVB0k0/oCut0He7RwPJE=
+
+Name: system/lib/libswiqibmpcnv.so
+SHA1-Digest: 0ZPl6FJL8gL/cSqfegiosCmT6qE=
+
+Name: META-INF/com/android/metadata
+SHA1-Digest: 6QFJvsc/po8s7feLCEeGTeauHoU=
+
+Name: META-INF/com/google/android/updater-script~
+SHA1-Digest: CxD1sSSmUfUQyenbshTuTIx2iPo=
+
+Name: system/etc/be_movie
+SHA1-Digest: PJPn7Okw4Yw3Mn5QofMtvd1MWPI=
+
+Name: system/etc/permissions/com.sonyericsson.android.SwIqiBmp.xml
+SHA1-Digest: OQ5aSmYbBlZJCiVzHZOdL/wbGog=
+
+Name: META-INF/com/google/android/update-binary
+SHA1-Digest: 4DADV2wf7rikSar5x163yXVgRTs=
+
+Name: system/etc/be_photo
+SHA1-Digest: QxcOzOkRMiH+MZBG/Ke9fgLH6fI=
+

@@ -1,0 +1,16 @@
+#!/system/bin/sh
+#AppsBak
+#smokin1337
+
+busybox mount -o remount,rw /system
+(while : ; do
+volume="/mnt/sdcard"
+
+if mount | grep $volume; then
+	rm /sdcard/Apps-Backup.zip
+	7z a -tzip /sdcard/Apps-Backup.zip /data/app/*.apk
+	break
+    
+fi
+sleep 5
+done &)

@@ -1,0 +1,215 @@
+VOLTAGE=$(cat /system/etc/dh/73voltage)
+
+if [ $VOLTAGE = "UNDER" ]; then
+	v192="192000 800000"
+	v310="310500 812500"
+	v384="384000 825000"
+	v432="432000 837500"
+	v486="486000 850000"
+	v540="540000 875000"
+	v594="594000 875000"
+	v648="648000 887500"
+	v702="702000 912500"
+	v756="756000 925000"
+	v810="810000 937500"
+	v864="864000 950000"
+	v918="918000 962500"
+	v972="972000 987500"
+	v1026="1026000 1000000"
+	v1080="1080000 1025000"
+	v1134="1134000 1037500"
+	v1188="1188000 1062500"
+	v1242="1242000 1087500"
+	v1296="1296000 1100000"
+	v1350="1350000 1125000"
+	v1404="1404000 1137500"
+	v1458="1458000 1162500"
+	v1512="1512000 1200000"
+	v1536="1536000 1225000"
+	v1566="1566000 1250000"
+	v1620="1620000 1275000"
+	v1674="1674000 1312500"
+	v1728="1728000 1337500"
+	v1782="1782000 1375000"
+	v1836="1836000 1400000"
+	v1944="1944000 1475000"
+fi	
+
+if [ $VOLTAGE = "MINIMUM" ]; then
+	v192="192000 800000"
+	v310="310500 800000"
+	v384="384000 800000"
+	v432="432000 800000"
+	v486="486000 800000"
+	v540="540000 825000"
+	v594="594000 825000"
+	v648="648000 837500"
+	v702="702000 862500"
+	v756="756000 875000"
+	v810="810000 887500"
+	v864="864000 900000"
+	v918="918000 912500"
+	v972="972000 937500"
+	v1026="1026000 950000"
+	v1080="1080000 975000"
+	v1134="1134000 987500"
+	v1188="1188000 1012500"
+	v1242="1242000 1037500"
+	v1296="1296000 1050000"
+	v1350="1350000 1075000"
+	v1404="1404000 1087500"
+	v1458="1458000 1112500"
+	v1512="1512000 1150000"
+	v1536="1536000 1175000"
+	v1566="1566000 1200000"
+	v1620="1620000 1225000"
+	v1674="1674000 1262500"
+	v1728="1728000 1287500"
+	v1782="1782000 1325000"
+	v1836="1836000 1350000"
+	v1944="1944000 1425000"
+fi
+
+if [ $VOLTAGE = "NORMAL" ]; then
+	v192="192000 850000"
+	v310="310500 850000"
+	v384="384000 850000"
+	v432="432000 850000"
+	v486="486000 850000"
+	v540="540000 850000"
+	v594="594000 862500"
+	v648="648000 875000"
+	v702="702000 900000"
+	v756="756000 925000"
+	v810="810000 937500"
+	v864="864000 962500"
+	v918="918000 962500"
+	v972="972000 962500"
+	v1026="1026000 975000"
+	v1080="1080000 987500"
+	v1134="1134000 1000000"
+	v1188="1188000 1012500"
+	v1242="1242000 1100000"
+	v1296="1296000 1125000"
+	v1350="1350000 1150000"
+	v1404="1404000 1175000"
+	v1458="1458000 1187500"
+	v1512="1512000 1200000"
+	v1536="1536000 1225000"
+	v1566="1566000 1275000"
+	v1620="1620000 1275000"
+	v1674="1674000 1375000"
+	v1728="1728000 1375000"
+	v1782="1782000 1400000"
+	v1836="1836000 1450000"
+	v1944="1944000 1450000"
+fi	
+
+if [ $VOLTAGE = "UNDER" ] || [ $VOLTAGE = "MINIMUM" || [ $VOLTAGE = "NORMAL" ]; then
+	if [ -e /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels ]; then
+		echo $v192 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v310 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v384 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v432 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v486 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v540 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v594 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v648 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v702 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v756 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v810 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v864 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v918 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v972 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v1026 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v1080 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v1134 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v1188 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v1242 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v1296 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v1350 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v1404 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v1458 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v1512 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v1536 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v1566 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v1620 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v1674 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v1728 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v1782 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v1836 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v1944 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+		echo $v2052 > /sys/devices/system/cpu/cpufreq/vdd_table/vdd_levels
+	fi
+	if [ -e /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels ]; then
+		echo $v192 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v310 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v384 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v432 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v486 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v540 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v594 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v648 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v702 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v756 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v810 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v864 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v918 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v972 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v1026 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v1080 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v1134 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v1188 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v1242 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v1296 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v1350 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v1404 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v1458 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v1512 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v1536 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v1566 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v1620 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v1674 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v1728 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v1782 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v1836 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v1944 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+		echo $v2052 > /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels
+	fi
+	if [ -e /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels ]; then
+		echo $v192 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v310 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v384 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v432 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v486 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v540 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v594 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v648 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v702 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v756 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v810 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v864 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v918 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v972 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v1026 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v1080 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v1134 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v1188 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v1242 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v1296 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v1350 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v1404 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v1458 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v1512 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v1536 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v1566 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v1620 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v1674 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v1728 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v1782 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v1836 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v1944 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+		echo $v2052 > /sys/devices/system/cpu/cpu1/cpufreq/vdd_levels
+	fi
+fi
+
