@@ -20,11 +20,11 @@ ro.htc.checkin.delay=0
  
 # ROM Manager OTA info
 ro.rommanager.developerid=miuius
-ro.modversion=MIUIUS-2.4.27-EN-SHOOTER
+ro.modversion=MIUIUS-2.4.30-EN-SHOOTER
  
 ro.build.id=MIUI
-ro.build.display.id=MIUIDH 2.4.27
-ro.build.version.incremental=2.4.27
+ro.build.display.id=MIUIDH 2.4.30
+ro.build.version.incremental=2.4.30
 ro.build.version.sdk=10
 ro.build.version.codename=REL
 ro.build.version.release=2.3.7
@@ -49,7 +49,7 @@ ro.board.platform=msm8660
 # ro.build.product is obsolete; use ro.product.device
 ro.build.product=shooter
 # Do not try to parse ro.build.description or .fingerprint
-ro.build.description=2.3.7 MIUI 2.4.27 release-keys
+ro.build.description=2.3.7 MIUI 2.4.30 release-keys
 ro.build.fingerprint=sprint/htc_shooter/shooter:2.3.3/GRI40/83920:user/release-keys
 # end build properties
 #
@@ -83,6 +83,7 @@ ro.telephony.default_network=4
 #
 ro.use_data_netmgrd=true
 persist.data_netmgrd_nint=8
+persist.data_netmgrd_mtu=1472
 #
 
 #Modify MTU from 1500 to 1472 on 3G network
