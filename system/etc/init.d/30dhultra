@@ -19,10 +19,10 @@ echo "4096" > /sys/devices/virtual/bdi/179:0/read_ahead_kb;
 
 #OPTIMIZE MOUNTS
 echo "Optimizing mounts for /system, /data and /cache"
-mount -o remount,data=writeback,delalloc,noatime,noauto_da_alloc,nodiratime,barrier=1,nobh /system
-mount -o remount,delalloc,noatime,noauto_da_alloc,nodiratime,nobh /data
-mount -o remount,delalloc,noatime,noauto_da_alloc,nodiratime,nobh /cache
-
+# Mounting Teaks
+mount -o ro,remount,nodev,nodiratime,noatime,delalloc,noauto_da_alloc /system /system
+mount -o remount,nodev,nodiratime,noatime,delalloc,noauto_da_alloc,barrier=0 /cache /cache
+mount -o remount,nodev,nodiratime,noatime,delalloc,noauto_da_alloc /data /data
 #Auto Update HOSTS file to block ads if enabled
 if [ `cat /system/etc/dh/76hostud` != 'on' ]; then
 	blockads
