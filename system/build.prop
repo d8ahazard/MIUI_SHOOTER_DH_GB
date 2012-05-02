@@ -23,13 +23,13 @@ ro.rommanager.developerid=miuius
 ro.modversion=MIUIUS-2.4.30-EN-SHOOTER
  
 ro.build.id=MIUI
-ro.build.display.id=MIUIDH 2.4.30
-ro.build.version.incremental=2.4.30
+ro.build.display.id=MIUIDH 2.5.1
+ro.build.version.incremental=2.5.1
 ro.build.version.sdk=10
 ro.build.version.codename=REL
 ro.build.version.release=2.3.7
-ro.build.date=Fri Apr 30 03:57:59 CST 2012
-ro.build.date.utc=1333072005
+ro.build.date=Tue May 1 03:57:59 CST 2012
+ro.build.date.utc=1335941845
 ro.build.type=user
 ro.build.user=digitalhigh
 ro.build.host=digitalhigh
