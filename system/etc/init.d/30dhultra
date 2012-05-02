@@ -27,6 +27,7 @@ mount -o remount,delalloc,noatime,noauto_da_alloc,nodiratime,nobh /cache
 if [ `cat /system/etc/dh/76hostud` != 'on' ]; then
 	blockads
 fi
+
 #CLEAN CACHE
 echo "Cleaning cache directories"
 rm -r /cache/*.apk 2>/dev/null
@@ -49,11 +50,6 @@ if [ -e /sys/kernel/fast_charge/force_fast_charge ] ; then
 		echo "0" > /sys/kernel/fast_charge/force_fast_charge
 	fi	
 fi
-
-#sysctl start
-sysctl -p
-
-
 
 #Zip align APKs
 echo "Zip Aligning APKs"
