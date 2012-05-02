@@ -230,5 +230,5 @@ ui_print("Wiping *CACHE* partition");
 assert(unmount("/cache") || ui_print("(cache is unmounted already)"));
 run_program("/sbin/erase_image", "cache");
 format("ext4", "EMMC", "/dev/block/mmcblk0p25");
-ui_print("It's a jacked-up MIUI 2.4.27.  Kudos!");
+ui_print("It's a jacked-up MIUI 2.5.1.  Kudos!");
 show_progress(0.100000, 0);
