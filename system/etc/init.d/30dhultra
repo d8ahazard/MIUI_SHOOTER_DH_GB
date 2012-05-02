@@ -106,38 +106,6 @@ done
 
 echo ""
 
-#INSERT TUN
-
-#Check if tun kernel module is present
-#insert it if it is.
-if [ -e /system/lib/modules/tun.ko ] ; then
-	insmod /system/lib/modules/tun.ko
-	echo "Inserted tun kernel module.";
-else
-	echo "No tun kernel module found.";
-fi
-
-# IPv6 Privacy
-echo "IPv6 tweaks"
-sysctl -w net.ipv6.conf.default.use_tempaddr=2
-sysctl -w net.ipv6.conf.all.use_tempaddr=2
-sysctl -w net.ipv6.conf.all.temp_prefered_lft=3600
-sysctl -w net.ipv6.conf.default.temp_prefered_lft=3600
-sysctl -w net.ipv6.conf.dummy0.use_tempaddr=2
-sysctl -w net.ipv6.conf.ip6tnl0.use_tempaddr=2
-sysctl -w net.ipv6.conf.lo.use_tempaddr=2
-sysctl -w net.ipv6.conf.rmnet0.use_tempaddr=2
-sysctl -w net.ipv6.conf.rmnet1.use_tempaddr=2
-sysctl -w net.ipv6.conf.rmnet2.use_tempaddr=2
-sysctl -w net.ipv6.conf.rmnet3.use_tempaddr=2
-sysctl -w net.ipv6.conf.rmnet4.use_tempaddr=2
-sysctl -w net.ipv6.conf.rmnet5.use_tempaddr=2
-sysctl -w net.ipv6.conf.rmnet6.use_tempaddr=2
-sysctl -w net.ipv6.conf.rmnet7.use_tempaddr=2
-sysctl -w net.ipv6.conf.sit0.use_tempaddr=2
-sysctl -w net.ipv6.conf.usb0.use_tempaddr=2
-echo ""
-
 #Disable Google Checking
 echo "Disable Google checking"
 if [ -e /data/data/com.google.android.gsf/databases/gservices.db ]; then
@@ -150,63 +118,12 @@ fi;
 
 echo ""
 
-#SICK TWEAKS
-echo "Sysctl tweaks"
-sysctl -w vm.oom_kill_allocating_task=0
-sysctl -w fs.nr_open=6553600
-sysctl -w fs.inotify.max_queued_events=10000
-sysctl -w fs.inotify.max_user_instances=100
-sysctl -w fs.inotify.max_user_watches=2500
-sysctl -w fs.lease-break-time=10
-sysctl -w fs.file-max=165164
-sysctl -w vm.laptop_mode=0
-sysctl -w vm.swappiness=0
-sysctl -w vm.overcommit_ratio=100
-sysctl -w vm.overcommit_memory=1
-sysctl -w vm.page-cluster=3
-sysctl -w vm.drop_caches=3
-sysctl -w vm.min_free_kbytes=4096
-sysctl -w vm.dirty_ratio=15
-sysctl -w vm.dirty_background_ratio=4
-sysctl -w vm.vfs_cache_pressure=5
-sysctl -w vm.panic_on_oom=0
-sysctl -w vm.dirty_expire_centisecs=200
-sysctl -w vm.dirty_writeback_centisecs=500
-sysctl -w kernel.sem="500 512000 64 2048"
-sysctl -w kernel.msgmax=64000
-sysctl -w kernel.msgmni=64000
-sysctl -w kernel.threads-max=525810
-sysctl -w kernel.random.write_wakeup_threshold=512
-sysctl -w kernel.random.read_wakeup_threshold=256
-sysctl -w kernel.panic=5
-sysctl -w kernel.shmall=16777216
-sysctl -w kernel.shmmax=268435456
-sysctl -w kernel.sched_latency_ns=10000000
-sysctl -w kernel.sched_min_granularity_ns=2000000
-sysctl -w kernel.sched_wakeup_granularity_ns=0
-sysctl -w kernel.sched_compat_yield=1
-
 setprop cm.filesystem.ready 1
 setprop dc.filesystem.ready 1
 setprop oxygen.filesystem.ready 1
 
-echo ""
-
-echo "Network and IPv4 tweaks"
-sysctl -w net.core.rmem_default=256960
-sysctl -w net.core.wmem_default=256960
-sysctl -w net.core.rmem_max=404480
-sysctl -w net.core.wmem_max=404480
-sysctl -w net.ipv4.tcp_timestamps=0
-sysctl -w net.ipv4.tcp_sack=1
-sysctl -w net.ipv4.tcp_tw_recycle=1
-sysctl -w net.ipv4.tcp_tw_reuse=1
-sysctl -w net.ipv4.tcp_window_scaling=1
-sysctl -w net.ipv4.tcp_fin_timeout=30
-sysctl -w net.ipv4.tcp_keepalive_intvl=30
-sysctl -w net.ipv4.tcp_wmem="4096 16384 404480"
-sysctl -w net.ipv4.tcp_rmem="4096 87380 404480"
-sysctl -w net.ipv4.tcp_keepalive_probes=5
+#sysctl start
+sysctl -p
 
 sync
 
