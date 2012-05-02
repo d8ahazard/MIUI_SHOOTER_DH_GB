@@ -408,7 +408,7 @@
 ;   on      - turn on Faceness (Front Face / Back Face) generation and culling.
 ;   off     - turn off Faceness generation and culling.
 ;
-;facenessCulling=on
+;facenessCulling=default
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -548,7 +548,7 @@
 ;   1 - (default) create new surface instead of using the update path
 ;   0 - use update path for full surface updates
 ;
-;fullSurfaceDynamicUpdatePath=0
+;fullSurfaceDynamicUpdatePath=1
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -570,7 +570,7 @@
 ;   Normal - (default) use normal MSAA smoothing. This is the default value. 
 ;   High   - use high MSAA smoothing.
 ;
-;MSAASmoothing=High
+;MSAASmoothing=Normal
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -599,7 +599,7 @@
 ;   1 - use 2x antialiasing.
 ;   2 - use 4x antialiasing.   
 ;
-;MSAAMode=2 
+;MSAAMode=0 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;##################################################################################################
